@@ -1,0 +1,14 @@
+com\idevexpert\scholl_web_application\data\dto\PagosDto.class
+com\idevexpert\scholl_web_application\data\connectiondb\ConnectionDataBase.class
+com\idevexpert\scholl_web_application\model\ModelStudent.class
+com\idevexpert\scholl_web_application\data\dto\UserDto.class
+com\idevexpert\scholl_web_application\data\connectiondb\ConnectionDb.class
+com\idevexpert\scholl_web_application\controller\ControllerDashboard.class
+com\idevexpert\scholl_web_application\data\dao\UserDao.class
+com\idevexpert\scholl_web_application\data\dao\PagosDao.class
+com\idevexpert\scholl_web_application\resources\JakartaEE8Resource.class
+com\idevexpert\scholl_web_application\JakartaRestConfiguration.class
+com\idevexpert\scholl_web_application\controller\ControllerStudent.class
+com\idevexpert\scholl_web_application\controller\ControllerLogin.class
+com\idevexpert\scholl_web_application\model\ModelAdministrator.class
+com\idevexpert\scholl_web_application\controller\ControllerAdmin.class
