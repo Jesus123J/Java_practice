@@ -50,7 +50,7 @@ public class CoordinatorModel extends CoordinatorDao {
     public CoordinatorTeacherJpanel coordinatorTeacherJpanel;
     public CoordinatorTutorJpanel coordinatorTutorJpanel;
     private String token;
-    private LodingJpanel lodingJpanel = new LodingJpanel();
+    public LodingJpanel lodingJpanel = new LodingJpanel();
     public JframeMain jframeMain;
     public NotificationProfile noti;
 
@@ -107,7 +107,7 @@ public class CoordinatorModel extends CoordinatorDao {
 
         /// MethodUtil.centerComponent(lodingJpanel, null, 0);
         Drawer.getInstance().closeDrawer();
-        insertComponentCenter(lodingJpanel);
+                insertComponentCenter(lodingJpanel);
         new Thread(new Runnable() {
             @Override
             public void run() {

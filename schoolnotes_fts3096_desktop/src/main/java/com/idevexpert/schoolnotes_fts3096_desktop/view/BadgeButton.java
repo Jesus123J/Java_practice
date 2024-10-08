@@ -87,6 +87,7 @@ public class BadgeButton extends JButton {
                 g2.setPaint(new TexturePaint(image, iconRect));
                 g2.fill(area);
                 String text = getText();
+                System.out.println("Text" + text);
                 createText(g2, x, y, size, text);
                 g2.dispose();
             } else {

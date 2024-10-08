@@ -39,6 +39,7 @@ public class ControllerLogin extends LoginModel implements ActionListener, KeyLi
                 LockFile.deletedfile();
             }
         });
+        loginJPanel.button1.doClick();
     }
 
     @Override

@@ -32,7 +32,7 @@ public class WebSocketClient {
             public void onMessage(WebSocket webSocket, String text) {
                 System.out.println("Mensaje recibido: " + text);
                 conteo++;
-                
+                System.out.println("Conteo " + conteo);
                 jframeMain.badgeButton1.setText(""+conteo);
                 Notifications.getInstance().show(Notifications.Type.INFO, Notifications.Location.BOTTOM_RIGHT, "Se registro un horario");
                 // Aquí puedes manejar la actualización de la UI o cualquier otra lógica

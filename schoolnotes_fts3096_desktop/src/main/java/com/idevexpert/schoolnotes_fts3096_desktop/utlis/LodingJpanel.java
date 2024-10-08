@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.sql.Time;
 import javax.swing.Timer;
 
@@ -22,11 +23,14 @@ public class LodingJpanel extends javax.swing.JPanel {
      * Creates new form LodingJpanel
      */
     public LodingJpanel() {
-        
+
         initComponents();
-        setBackground(ColorUtil.kPrimaryTransparent);
-        imageAvatar1.setBackground(ColorUtil.kPrimaryTransparent);
-        //jLabel1.setBackground(ColorUtil.kPrimaryTransparent);
+        setOpaque(false);
+        addMouseListener(new MouseAdapter() {
+        }); // Captura eventos de mouse
+        addMouseMotionListener(new MouseAdapter() {
+        });
+        //setBackground(ColorUtil.kPrimaryTransparent);
     }
 
     /**
@@ -37,26 +41,32 @@ public class LodingJpanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        imageAvatar1 = new com.idevexpert.schoolnotes_fts3096_desktop.utlis.ImageAvatar();
+        jLabel1 = new javax.swing.JLabel();
 
-        setLayout(new java.awt.GridBagLayout());
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loadingPanel.gif"))); // NOI18N
 
-        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loadingPanel.gif"))); // NOI18N
-        imageAvatar1.setOpaque(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 203;
-        gridBagConstraints.ipady = 202;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(186, 349, 185, 336);
-        add(imageAvatar1, gridBagConstraints);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.idevexpert.schoolnotes_fts3096_desktop.utlis.ImageAvatar imageAvatar1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

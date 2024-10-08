@@ -80,6 +80,7 @@ public class LoginJPanel extends javax.swing.JPanel {
 
         textField1.setBackground(new java.awt.Color(255, 255, 255));
         textField1.setForeground(new java.awt.Color(0, 0, 0));
+        textField1.setText("administrador");
         textField1.setLabelText("USUARIO");
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo_school_login.png"))); // NOI18N
@@ -102,6 +103,7 @@ public class LoginJPanel extends javax.swing.JPanel {
 
         passwordField1.setBackground(new java.awt.Color(255, 255, 255));
         passwordField1.setForeground(new java.awt.Color(0, 0, 0));
+        passwordField1.setText("123456");
         passwordField1.setLabelText("CONTRASEÑA");
         passwordField1.setShowAndHide(true);
         passwordField1.addActionListener(new java.awt.event.ActionListener() {
@@ -199,9 +201,9 @@ public class LoginJPanel extends javax.swing.JPanel {
     public com.idevexpert.schoolnotes_fts3096_desktop.utlis.ImageAvatar imageAvatar1;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel3;
     private com.idevexpert.schoolnotes_fts3096_desktop.utlis.PanelRound panelRound1;
     public com.idevexpert.schoolnotes_fts3096_desktop.utlis.PasswordField passwordField1;
     public com.idevexpert.schoolnotes_fts3096_desktop.utlis.TextField textField1;

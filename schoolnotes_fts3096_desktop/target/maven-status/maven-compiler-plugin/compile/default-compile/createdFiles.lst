@@ -84,6 +84,7 @@ com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\CoordinatorPersonJpa
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorListPersonTutorResponse.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dao\WebSocketDao.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\tutor\TutorDashboardJpanel.class
+com\idevexpert\schoolnotes_fts3096_desktop\utlis\LodingJpanel$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\CreateAccountPerson.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\CoordinatorDesAssingStudentByProxyRequest.class
 com\idevexpert\schoolnotes_fts3096_desktop\utlis\TextField.class
@@ -105,6 +106,7 @@ com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TeacherCompleteCas
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\PersonProxyAssignedDto.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\CoordinatorPersonJpanel$7.class
 com\idevexpert\schoolnotes_fts3096_desktop\controller\ControllerCoordinator.class
+com\idevexpert\schoolnotes_fts3096_desktop\controller\ControllerCoordinator$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\service\TeacherCases.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TutorAssignedProxyByStudentResponse.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\service\CoordinatorCasesService.class
@@ -244,7 +246,9 @@ com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorAssingS
 com\idevexpert\schoolnotes_fts3096_desktop\utlis\PasswordField$4.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\CoordinatorDeriveTutorCaseRequest.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorDesAssingStudentByCoordinatorResponse.class
+com\idevexpert\schoolnotes_fts3096_desktop\utlis\Button.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\CoordinatorNotificationJpanel$3.class
+com\idevexpert\schoolnotes_fts3096_desktop\utlis\LodingJpanel$2.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\CoordinatorTeacherJpanel.class
 com\idevexpert\schoolnotes_fts3096_desktop\controller\ControllerLogin$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\GenericErrorResponse.class

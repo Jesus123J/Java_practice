@@ -14,6 +14,7 @@ import com.idevexpert.schoolnotes_fts3096_desktop.view.JframeMain;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.CoordinatorPersonJpanel;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.MyDraweCoordinatorComponent;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.TableActionEvent;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +22,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -145,36 +148,57 @@ public class ControllerCoordinator extends CoordinatorModel implements
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(coordinatorPersonJpanel.jTableDataPerson)) {
             if (coordinatorPersonJpanel.jTableDataPerson.getSelectedRow() >= 0) {
-                listTypeTempOrLinearForTablePerson();
-                SwingUtilities.updateComponentTreeUI(coordinatorPersonJpanel.jTableDataAccount);
-                jframeMain.revalidate();
-                jframeMain.repaint();
+                System.out.println("Press");
+                
+                jframeMain.jPanel4.add(lodingJpanel);
+                jframeMain.jPanel4.setComponentZOrder(lodingJpanel, 0);
+                jframeMain.jPanel4.revalidate();
+                jframeMain.jPanel4.repaint();
+                new Thread(
+                        new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+                            Thread.sleep(10000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ControllerCoordinator.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        jframeMain.jPanel4.remove(lodingJpanel);
+                        jframeMain.jPanel4.revalidate();
+                        jframeMain.jPanel4.repaint();
+                    }
+
+                }
+                ).start();
+
             }
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getSource().equals(coordinatorPersonJpanel.jTableDataPerson)) {
-            if (coordinatorPersonJpanel.jTableDataPerson.getSelectedRow() >= 0) {
-                listTypeTempOrLinearForTablePerson();
-                SwingUtilities.updateComponentTreeUI(coordinatorPersonJpanel.jTableDataAccount);
-                jframeMain.revalidate();
-                jframeMain.repaint();
-            }
-        }
+//        if (e.getSource().equals(coordinatorPersonJpanel.jTableDataPerson)) {
+//            if (coordinatorPersonJpanel.jTableDataPerson.getSelectedRow() >= 0) {
+//                listTypeTempOrLinearForTablePerson();
+//                SwingUtilities.updateComponentTreeUI(coordinatorPersonJpanel.jTableDataAccount);
+//                jframeMain.revalidate();
+//                jframeMain.repaint();
+//            }
+//        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.getSource().equals(coordinatorPersonJpanel.jTableDataPerson)) {
-            if (coordinatorPersonJpanel.jTableDataPerson.getSelectedRow() >= 0) {
-                listTypeTempOrLinearForTablePerson();
-                SwingUtilities.updateComponentTreeUI(coordinatorPersonJpanel.jTableDataAccount);
-                jframeMain.revalidate();
-                jframeMain.repaint();
-            }
-        }
+//        if (e.getSource().equals(coordinatorPersonJpanel.jTableDataPerson)) {
+//            if (coordinatorPersonJpanel.jTableDataPerson.getSelectedRow() >= 0) {
+//                listTypeTempOrLinearForTablePerson();
+//                SwingUtilities.updateComponentTreeUI(coordinatorPersonJpanel.jTableDataAccount);
+//                jframeMain.revalidate();
+//                jframeMain.repaint();
+//            }
+//        }
     }
 
     @Override
@@ -217,7 +241,7 @@ public class ControllerCoordinator extends CoordinatorModel implements
             }
         } catch (Exception e) {
         }
-      
+
     }
 
 }
