@@ -22,6 +22,7 @@ import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.CoordinatorTe
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.CoordinatorTutorJpanel;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.NotificationProfile;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.CreateAccountPerson;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,8 +33,15 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 import org.apache.commons.lang3.StringUtils;
+import raven.alerts.MessageAlerts;
 import raven.drawer.Drawer;
+import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
+import raven.popup.Option;
+import raven.popup.component.GlassPaneChild;
+import raven.popup.component.PopupCallbackAction;
+import raven.popup.component.SimplePopupBorder;
+import raven.popup.component.SimplePopupBorderOption;
 
 /**
  *
@@ -98,8 +106,7 @@ public class CoordinatorModel extends CoordinatorDao {
         }
         personListTableTem.setListPerson(personDtos);
         MethodUtil.insertDataTable(personListTableTem, coordinatorPersonJpanel.jTableDataPerson);
-        insertCopyDataTablePerson(personListTable, 0);
-        MethodUtil.clearRowTable(coordinatorPersonJpanel.jTableDataAccount);
+        insertCopyDataTablePerson(null, 0);
 
     }
 
@@ -107,15 +114,10 @@ public class CoordinatorModel extends CoordinatorDao {
 
         /// MethodUtil.centerComponent(lodingJpanel, null, 0);
         Drawer.getInstance().closeDrawer();
-                insertComponentCenter(lodingJpanel);
+        insertComponentCenter(lodingJpanel);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(6000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CoordinatorModel.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 personListTable = personList(token);
                 if (personListTable == null) {
                     personListTable = new CoordinatorPeopleListResponse();
@@ -127,11 +129,30 @@ public class CoordinatorModel extends CoordinatorDao {
     }
 
     public void insertDataTablePersonAccount(CoordinatorPeopleListResponse coordinatorPeopleListResponseTempChang) {
-        responseListAccountByPerson = listAccountByPerson(token, coordinatorPeopleListResponseTempChang.getListPerson().get(coordinatorPersonJpanel.jTableDataPerson.getSelectedRow()).getPersonId());
-        if (responseListAccountByPerson == null) {
-            responseListAccountByPerson = new CoordinatorAccountsByPersonListResponse();
-        }
-        MethodUtil.insertDataTable(responseListAccountByPerson, coordinatorPersonJpanel.jTableDataAccount);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Espera");
+                responseListAccountByPerson = listAccountByPerson(token, coordinatorPeopleListResponseTempChang.getListPerson().get(coordinatorPersonJpanel.jTableDataPerson.getSelectedRow()).getPersonId());
+                System.out.println("Imprime");
+                try {
+
+                    if (responseListAccountByPerson.getAccountsList() == null) {
+                        coordinatorPersonJpanel.jTabbedPane1.setSelectedIndex(0);
+                        coordinatorPersonJpanel.jTabbedPane1.setEnabledAt(1, false);
+                        MessageAlerts.getInstance().showMessage("", "No cuenta con cuenta esta persona");
+                    } else {
+                        coordinatorPersonJpanel.jTabbedPane1.setEnabledAt(1, true);
+                    }
+                    MethodUtil.insertDataTable(responseListAccountByPerson, coordinatorPersonJpanel.jTableDataAccount);
+                } catch (Exception e) {
+                    MessageAlerts.getInstance().showMessage("", "No tiene conexion vuelva a intentarlo otra ves", MessageAlerts.MessageType.WARNING);
+                }
+                
+                GlassPanePopup.closePopupAll();
+
+            }
+        }).start();
     }
 
     public void insertCopyDataTablePerson(CoordinatorPeopleListResponse coordinatorPeopleListResponseTempChang, int nothingOrsomething) {
@@ -146,10 +167,13 @@ public class CoordinatorModel extends CoordinatorDao {
         coordinatorPersonJpanel.textFieldAddress.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getAddress()) : "");
         coordinatorPersonJpanel.textFieldCellPhone.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getCellphone()) : "");
 
-        if (nothingOrsomething == 0) {
+        if (nothingOrsomething == 0 && coordinatorPeopleListResponseTempChang == null) {
             coordinatorPersonJpanel.jFormattedTextFieldDate.setText("");
             coordinatorPersonJpanel.jCheckBoxWomen.setSelected(false);
             coordinatorPersonJpanel.jCheckBoxMen.setSelected(false);
+            coordinatorPersonJpanel.jTabbedPane1.setSelectedIndex(0);
+            coordinatorPersonJpanel.jTabbedPane1.setEnabledAt(1, false);
+            MethodUtil.clearRowTable(coordinatorPersonJpanel.jTableDataAccount);
             return;
         }
         String sexPeson = coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getSex();
@@ -177,6 +201,25 @@ public class CoordinatorModel extends CoordinatorDao {
     }
 
     public void listTypeTempOrLinearForTablePerson() {
+      
+        GlassPanePopup.showPopup(new SimplePopupBorder(lodingJpanel, null, new SimplePopupBorderOption()
+                .setRoundBorder(30)
+                .setWidth(300).setOpaque(true)), new DefaultOption() {
+            @Override
+            public int duration() {
+                return 1;
+            }
+
+            @Override
+            public float getAnimate() {
+                setAnimate(1);
+                return 1;
+            }    
+            
+            
+
+        }, "loading");
+
         if (coordinatorPersonJpanel.jTableDataPerson.getRowCount() != personListTable.getListPerson().size()) {
             insertCopyDataTablePerson(personListTableTem, 1);
             insertDataTablePersonAccount(personListTableTem);
@@ -192,11 +235,9 @@ public class CoordinatorModel extends CoordinatorDao {
 
     public void insertComponentCenter(JComponent component) {
         jframeMain.jPanel4.removeAll();
-        SwingUtilities.updateComponentTreeUI(component);
-        component.revalidate();
-        component.repaint();
         jframeMain.jPanel4.add(component);
-        jframeMain.revalidate();
-        jframeMain.repaint();
+        jframeMain.jPanel4.revalidate();
+        jframeMain.jPanel4.repaint();
+
     }
 }

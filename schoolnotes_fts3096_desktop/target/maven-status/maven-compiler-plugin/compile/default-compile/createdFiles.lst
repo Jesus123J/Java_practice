@@ -6,6 +6,7 @@ com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\CoordinatorDesAssin
 chart\SeriesSize.class
 com\idevexpert\schoolnotes_fts3096_desktop\utlis\ColorUtil.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\CoordinatorNotificationJpanel$4.class
+com\idevexpert\schoolnotes_fts3096_desktop\model\CoordinatorModel$2.class
 raven\popup\component\GlassPaneChild$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\utlis\MethodUtil.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorListCoursesToBeAssignedResponse.class
@@ -33,7 +34,6 @@ com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorStudent
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\GlassPaneLogin.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorDesAssingCoursesByTeacherAccountResponse.class
 raven\drawer\component\menu\data\Item$Label.class
-com\idevexpert\schoolnotes_fts3096_desktop\view\JframeMain$3.class
 raven\toast\util\NotificationHolder.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dao\TutorDao.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorListTeachersWithCoursesResponse.class
@@ -76,6 +76,7 @@ com\idevexpert\schoolnotes_fts3096_desktop\utlis\ActionButton.class
 raven\toast\ui\ToastPanelUI$PanelNotificationLayout.class
 com\idevexpert\schoolnotes_fts3096_desktop\utlis\RippleEffect$Effect.class
 raven\popup\component\PopupController.class
+raven\popup\component\SimplePopupBorder$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\NoteDataStudentDto.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\CoordinatorProxyJpanel.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\TeacherCoursesListDto.class
@@ -100,13 +101,13 @@ com\idevexpert\schoolnotes_fts3096_desktop\data\dto\TeachersWithCourseDto.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorSummaryForCoordinatorResponse.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\AccountTypeDto.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\api\WebSocketClient.class
+com\idevexpert\schoolnotes_fts3096_desktop\model\LoginModel$2.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\SummaryForCoordinatorDto.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorListCaseResponse.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TeacherCompleteCaseInformationResponse.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\PersonProxyAssignedDto.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\CoordinatorPersonJpanel$7.class
 com\idevexpert\schoolnotes_fts3096_desktop\controller\ControllerCoordinator.class
-com\idevexpert\schoolnotes_fts3096_desktop\controller\ControllerCoordinator$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\service\TeacherCases.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TutorAssignedProxyByStudentResponse.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\service\CoordinatorCasesService.class
@@ -126,6 +127,7 @@ com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorStudent
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\StudentsAvailableTutorDto.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorListAvailableAccountTypesResponse$CoordinatorListAvailableAccountTypesResponseBuilder.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorAlertsForCoordinatorResponse.class
+raven\popup\GlassPopup$4.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TutorCompleteCaseInformationResponse.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TutorListCaseResponse$TutorListCaseResponseBuilder.class
 raven\toast\Notifications$1.class
@@ -161,7 +163,6 @@ com\idevexpert\schoolnotes_fts3096_desktop\data\service\CoordinatorTutorService.
 chart\NiceScale.class
 raven\popup\component\SimplePopupBorderOption.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\TableActionEvent.class
-com\idevexpert\schoolnotes_fts3096_desktop\view\JframeMain$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TutorAssignedProxyByStudentResponse$TutorAssignedProxyByStudentResponseBuilder.class
 chart\ModelLegend.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\TeacherNoteStudentRegisterRequest.class
@@ -184,7 +185,6 @@ shadow\ShadowRenderer.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorEditStatusResponse$CoordinatorEditStatusResponseBuilder.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\CoordinatorNotificationJpanel.class
 raven\drawer\component\menu\SimpleMenu$SubMenuItem$SubmenuLayout.class
-com\idevexpert\schoolnotes_fts3096_desktop\view\JframeMain$2.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dao\CoordinatorDao.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\TutorCompleteCaseInformationRequest.class
 raven\alerts\AlertsOption$EffectOption.class
@@ -238,6 +238,7 @@ com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TutorListAssignedS
 raven\swing\animator\Evaluator.class
 raven\toast\Notifications.class
 chart\BlankPlotChart$1.class
+com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\GlassPaneLogin$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\entity\PersonTutorStudentTb.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\CoordinatorCloseCaseRequest.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\StudentsWithoutAssignedTutorDto.class
@@ -252,6 +253,7 @@ com\idevexpert\schoolnotes_fts3096_desktop\utlis\LodingJpanel$2.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\CoordinatorTeacherJpanel.class
 com\idevexpert\schoolnotes_fts3096_desktop\controller\ControllerLogin$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\GenericErrorResponse.class
+com\idevexpert\schoolnotes_fts3096_desktop\model\CoordinatorModel$3.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TeacherAssingHomeworkResponse$TeacherAssingHomeworkResponseBuilder.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\teacher\TeacherManagmentJpanel.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\ListCoursesToBeAssignedDto.class
@@ -318,6 +320,7 @@ com\idevexpert\schoolnotes_fts3096_desktop\utlis\ShadowRenderer.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\dto\SituationsSentToTheTeacherDto$SituationsSentToTheTeacherDtoBuilder.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\MyDraweCoordinatorComponent$1.class
 com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TeacherListCaseResponse$TeacherListCaseResponseBuilder.class
+raven\popup\GlassPopup$4$1.class
 raven\alerts\SimpleAlerts.class
 raven\drawer\component\menu\SimpleMenu.class
 com\idevexpert\schoolnotes_fts3096_desktop\view\login\LoginJPanel.class

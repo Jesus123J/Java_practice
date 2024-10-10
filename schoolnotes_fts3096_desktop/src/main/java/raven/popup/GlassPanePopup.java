@@ -41,6 +41,7 @@ public class GlassPanePopup {
             layerPane.setVisible(true);
         }
         layerPane.grabFocus();
+        System.out.println("Se ,uestrqs");
     }
 
     private void updateLayout() {
@@ -137,10 +138,14 @@ public class GlassPanePopup {
 
     public static void closePopup(String name) {
         for (Component com : instance.layerPane.getComponents()) {
+            System.out.println("Components sssss");
             if (com.getName() != null && com.getName().equals(name)) {
                 if (com instanceof GlassPopup) {
+                    System.out.println("Cerrando por nombre");
                     GlassPopup popup = (GlassPopup) com;
                     popup.setShowPopup(false);
+                } else {
+                    System.out.println("No se encontro");
                 }
             }
         }
@@ -162,9 +167,11 @@ public class GlassPanePopup {
     }
 
     public static void closePopupAll() {
+        System.out.println("Se va a cerrar");
         for (Component com : instance.layerPane.getComponents()) {
             if (com instanceof GlassPopup) {
                 GlassPopup popup = (GlassPopup) com;
+                System.out.println("Name" + popup.getName());
                 popup.setShowPopup(false);
             }
         }

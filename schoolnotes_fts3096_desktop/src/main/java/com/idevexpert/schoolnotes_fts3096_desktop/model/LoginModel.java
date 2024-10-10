@@ -13,6 +13,7 @@ import com.idevexpert.schoolnotes_fts3096_desktop.utlis.LockFile;
 import com.idevexpert.schoolnotes_fts3096_desktop.utlis.LodingJpanel;
 import com.idevexpert.schoolnotes_fts3096_desktop.utlis.MethodUtil;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.JframeMain;
+import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.CreateAccountPerson;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.login.LoginJPanel;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -21,6 +22,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import raven.popup.DefaultOption;
+import raven.popup.GlassPanePopup;
+import raven.popup.component.SimplePopupBorder;
+import raven.popup.component.SimplePopupBorderOption;
 
 /**
  *
@@ -80,11 +85,21 @@ public class LoginModel extends LoginDao {
             System.out.println("file alredy exists");
             System.exit(0);
         }
-        LockFile.fileCreated();
+        LockFile.createLockFile();
+        LockFile.startLockFileMonitor();
         jFrameMain = new JframeMain();
         jFrameMain.setSize(800, 600);
         jFrameMain.setMinimumSize(new Dimension(800, 600));
-        MethodUtil.centerComponent(loginJPanel, null, 0);
+        GlassPanePopup.showPopup(new SimplePopupBorder(loginJPanel, null, new SimplePopupBorderOption()
+                .setRoundBorder(30)
+                .setWidth(300)), new DefaultOption() {
+            @Override
+            public boolean closeWhenPressedEsc() {
+                return false;
+            }
+            
+
+        });
         jFrameMain.revalidate();
         jFrameMain.repaint();
         jFrameMain.toFront();

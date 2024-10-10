@@ -62,11 +62,6 @@ public class JframeMain extends javax.swing.JFrame {
         actionButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/header/menu.png"))); // NOI18N
         actionButton3.setToolTipText("");
         actionButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        actionButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actionButton3ActionPerformed(evt);
-            }
-        });
 
         panelRound1.setRoundBottomLeft(20);
         panelRound1.setRoundBottomRight(20);
@@ -87,24 +82,14 @@ public class JframeMain extends javax.swing.JFrame {
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         badgeButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/header/notificacion.png"))); // NOI18N
         badgeButton1.setText("5");
         badgeButton1.setHideActionText(true);
-        badgeButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                badgeButton1ActionPerformed(evt);
-            }
-        });
 
         actionButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/header/menuHome.png"))); // NOI18N
-        actionButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actionButton2ActionPerformed(evt);
-            }
-        });
 
         toggleButton1.setForeground(new java.awt.Color(0, 0, 0));
         toggleButton1.setSelected(true);
@@ -135,16 +120,14 @@ public class JframeMain extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(actionButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(panelRound1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(actionButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(toggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(actionButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 102, 102));
-        jPanel4.setLayout(new javax.swing.OverlayLayout(jPanel4));
+        jPanel4.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,20 +148,6 @@ public class JframeMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void badgeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badgeButton1ActionPerformed
-//        MessageAlerts.getInstance().showMessage("", "Hola");
-//public void show(Type type, Location location, long duration, String message) {
-        Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, 2000, "Hola");
-    }//GEN-LAST:event_badgeButton1ActionPerformed
-
-    private void actionButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_actionButton2ActionPerformed
-
-    private void actionButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionButton3ActionPerformed
-        Drawer.getInstance().showDrawer();
-    }//GEN-LAST:event_actionButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public com.idevexpert.schoolnotes_fts3096_desktop.utlis.ActionButton actionButton2;

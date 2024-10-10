@@ -4,7 +4,6 @@ import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.Animator;
 import com.formdev.flatlaf.util.CubicBezierEasing;
 import com.formdev.flatlaf.util.UIScale;
-import com.idevexpert.schoolnotes_fts3096_desktop.utlis.ColorUtil;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -47,7 +46,6 @@ public class ComponentLayer extends JPanel {
         }
         add(component);
         component.setVisible(false);
-        setBackground(ColorUtil.kPrimaryTransparent);
     }
 
     private void initAnimator() {

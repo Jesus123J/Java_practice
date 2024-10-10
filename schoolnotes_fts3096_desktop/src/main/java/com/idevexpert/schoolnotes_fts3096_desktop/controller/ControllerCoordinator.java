@@ -9,9 +9,12 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.idevexpert.schoolnotes_fts3096_desktop.exceptions.ErrorService;
 import com.idevexpert.schoolnotes_fts3096_desktop.model.CoordinatorModel;
 import com.idevexpert.schoolnotes_fts3096_desktop.utlis.ColorUtil;
+import com.idevexpert.schoolnotes_fts3096_desktop.utlis.MethodUtil;
 import com.idevexpert.schoolnotes_fts3096_desktop.utlis.MyDrawerListener;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.JframeMain;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.CoordinatorPersonJpanel;
+import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.CreateAccountPerson;
+import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.EditAccountPerson;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.MyDraweCoordinatorComponent;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.TableActionEvent;
 import java.awt.Color;
@@ -22,24 +25,38 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import raven.alerts.SimpleAlerts;
 import raven.drawer.Drawer;
+import raven.popup.DefaultOption;
+import raven.popup.GlassPanePopup;
+import raven.popup.GlassPopup;
+import raven.popup.component.GlassPaneChild;
+import raven.popup.component.SimplePopupBorder;
+import raven.popup.component.SimplePopupBorderOption;
 
 /**
  *
  * @author Jesus Gutierrez
  */
 public class ControllerCoordinator extends CoordinatorModel implements
-        ActionListener, DocumentListener, MouseListener, TableActionEvent, MyDrawerListener {
+        ActionListener, DocumentListener, MouseListener, TableActionEvent, MyDrawerListener,
+        ListSelectionListener {
 
     public ControllerCoordinator(String token, JframeMain jframeMain) {
+
         super(token, jframeMain);
+        // MethodUtil.setControllerCoordinator(this);
         Drawer.getInstance().setDrawerBuilder(new MyDraweCoordinatorComponent("jose", "pedro", this));
         System.out.println("entering coordinator panel");
 
@@ -50,15 +67,8 @@ public class ControllerCoordinator extends CoordinatorModel implements
         jframeMain.actionButton2.addActionListener(this);
 
         //Action listener
-        coordinatorNotificationJpanel.jButtonPerson.addActionListener(this);
-        coordinatorNotificationJpanel.jButtonAttendance.addActionListener(this);
-        coordinatorNotificationJpanel.jButtonAnnouncement.addActionListener(this);
-        coordinatorNotificationJpanel.jButtonTeacher.addActionListener(this);
-        coordinatorNotificationJpanel.jButtonTutor.addActionListener(this);
-        coordinatorNotificationJpanel.jButtonAccounr.addActionListener(this);
-        coordinatorNotificationJpanel.jButtonProxy.addActionListener(this);
-        coordinatorPersonJpanel.buttonCreateAccount.addActionListener(this);
-        coordinatorPersonJpanel.buttonEditOrRegister.addActionListener(this);
+        jframeMain.actionButton3.addActionListener(this);
+        jframeMain.actionButton2.addActionListener(this);
 
         //Document listener
         coordinatorPersonJpanel.textFieldPersonSearch.getDocument().addDocumentListener(this);
@@ -69,15 +79,12 @@ public class ControllerCoordinator extends CoordinatorModel implements
         coordinatorPersonJpanel.textFieldName.getDocument().addDocumentListener(this);
 
         //Mouse listener
-        coordinatorPersonJpanel.jTableDataPerson.addMouseListener(this);
-        coordinatorNotificationJpanel.jButtonPerson.addMouseListener(this);
-        coordinatorNotificationJpanel.jButtonAttendance.addMouseListener(this);
-        coordinatorNotificationJpanel.jButtonAnnouncement.addMouseListener(this);
-        coordinatorNotificationJpanel.jButtonTeacher.addMouseListener(this);
-        coordinatorNotificationJpanel.jButtonTutor.addMouseListener(this);
-        coordinatorNotificationJpanel.jButtonAccounr.addMouseListener(this);
-        coordinatorNotificationJpanel.jButtonProxy.addMouseListener(this);
+        jframeMain.actionButton3.addActionListener(this);
+        coordinatorPersonJpanel.jCheckBoxMen.addActionListener(this);
+        coordinatorPersonJpanel.jCheckBoxWomen.addActionListener(this);
 
+        coordinatorPersonJpanel.jTableDataPerson.getSelectionModel().addListSelectionListener(this);
+        coordinatorPersonJpanel.jTableDataAccount.getSelectionModel().addListSelectionListener(this);
     }
 
     @Override
@@ -88,12 +95,12 @@ public class ControllerCoordinator extends CoordinatorModel implements
 //        if (e.getSource().equals(jframeMain.actionButton1)) {
 //            eventActionActionButton1();
 //        }
-//        if (e.getSource().equals(jframeMain.actionButton2)) {
-//            insertComponentCenter(coordinatorDashboardJpanel);
-//        }
-//        if (e.getSource().equals(jframeMain.actionButton3)) {
-//            eventActionActionButton3();
-//        }
+        if (e.getSource().equals(jframeMain.actionButton3)) {
+            Drawer.getInstance().showDrawer();
+        }
+        if (e.getSource().equals(jframeMain.actionButton2)) {
+            insertComponentCenter(coordinatorDashboardJpanel);
+        }
         if (e.getSource().equals(coordinatorNotificationJpanel.jButtonPerson)) {
             System.out.println("entering dashboard person");
             insertDataTablePerson();
@@ -124,6 +131,14 @@ public class ControllerCoordinator extends CoordinatorModel implements
         if (e.getSource().equals(coordinatorNotificationJpanel.jButtonProxy)) {
             insertComponentCenter(coordinatorProxyJpanel);
         }
+        if (e.getSource().equals(coordinatorPersonJpanel.jCheckBoxMen)) {
+            coordinatorPersonJpanel.jCheckBoxWomen.setSelected(false);
+            coordinatorPersonJpanel.jCheckBoxMen.setSelected(true);
+        }
+        if (e.getSource().equals(coordinatorPersonJpanel.jCheckBoxWomen)) {
+            coordinatorPersonJpanel.jCheckBoxMen.setSelected(false);
+            coordinatorPersonJpanel.jCheckBoxWomen.setSelected(true);
+        }
     }
 
     @Override
@@ -146,45 +161,20 @@ public class ControllerCoordinator extends CoordinatorModel implements
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource().equals(coordinatorPersonJpanel.jTableDataPerson)) {
-            if (coordinatorPersonJpanel.jTableDataPerson.getSelectedRow() >= 0) {
-                System.out.println("Press");
-                
-                jframeMain.jPanel4.add(lodingJpanel);
-                jframeMain.jPanel4.setComponentZOrder(lodingJpanel, 0);
-                jframeMain.jPanel4.revalidate();
-                jframeMain.jPanel4.repaint();
-                new Thread(
-                        new Runnable() {
-                    @Override
-                    public void run() {
-
-                        try {
-                            Thread.sleep(10000);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(ControllerCoordinator.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                        jframeMain.jPanel4.remove(lodingJpanel);
-                        jframeMain.jPanel4.revalidate();
-                        jframeMain.jPanel4.repaint();
-                    }
-
-                }
-                ).start();
-
-            }
-        }
+//        if (e.getSource().equals(coordinatorPersonJpanel.jTableDataPerson)) {
+//            if (coordinatorPersonJpanel.jTableDataPerson.getSelectedRow() >= 0) {
+//               
+//            }
+//        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+
 //        if (e.getSource().equals(coordinatorPersonJpanel.jTableDataPerson)) {
 //            if (coordinatorPersonJpanel.jTableDataPerson.getSelectedRow() >= 0) {
+//                System.out.println("Se mantenio precionado el mouse");
 //                listTypeTempOrLinearForTablePerson();
-//                SwingUtilities.updateComponentTreeUI(coordinatorPersonJpanel.jTableDataAccount);
-//                jframeMain.revalidate();
-//                jframeMain.repaint();
 //            }
 //        }
     }
@@ -223,7 +213,11 @@ public class ControllerCoordinator extends CoordinatorModel implements
                 System.out.println("Block");
                 break;
             case 2:  //Edit
+                GlassPanePopup.showPopup(new SimplePopupBorder(new CreateAccountPerson(), null, new SimplePopupBorderOption()
+                        .setRoundBorder(30)
+                        .setWidth(500)));
 
+                System.out.println(GlassPanePopup.isShowing("Edit glass"));
                 break;
             case 3:
                 System.out.println("Edit");
@@ -233,15 +227,39 @@ public class ControllerCoordinator extends CoordinatorModel implements
 
     @Override
     public void index(int[] index) {
-        try {
-            switch (index[1]) {
-                case 0:
-                    insertDataTablePerson();
-                    break;
-            }
-        } catch (Exception e) {
+        switch (index[0]) {
+            case 0:
+                insertCopyDataTablePerson(null, 0);
+                insertDataTablePerson();
+                break;
+            case 1:
+                try {
+                    switch (index[1]) {
+                        case 0:
+                            System.out.println("Profesor");
+                            break;
+                    }
+                } catch (Exception e) {
+                }
+
+                break;
         }
 
     }
 
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (e.getSource().equals(coordinatorPersonJpanel.jTableDataPerson.getSelectionModel())) {
+            if (!e.getValueIsAdjusting()) {
+                if (coordinatorPersonJpanel.jTableDataPerson.getSelectedRow() >= 0) {
+                    System.out.println("se hiso click");
+                    listTypeTempOrLinearForTablePerson();
+                }
+            }
+        }
+    }
+
+    public void handleMouseClick(JComponent component) {
+        GlassPanePopup.closePopup(component);
+    }
 }

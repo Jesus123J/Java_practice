@@ -24,22 +24,24 @@ import java.awt.event.WindowListener;
 public class ControllerLogin extends LoginModel implements ActionListener, KeyListener {
 
     public ControllerLogin() {
-       
+
         loginJPanel.button1.addActionListener(this);
         loginJPanel.passwordField1.addKeyListener(this);
         loginJPanel.textField1.addKeyListener(this);
         jFrameMain.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                LockFile.deletedfile();
+                LockFile.deleteFile();
+                LockFile.stopLockFileMonitor();
             }
 
             @Override
             public void windowClosed(WindowEvent e) {
-                LockFile.deletedfile();
+                LockFile.deleteFile();
+                LockFile.stopLockFileMonitor();
             }
         });
-        loginJPanel.button1.doClick();
+       // loginJPanel.button1.doClick();
     }
 
     @Override

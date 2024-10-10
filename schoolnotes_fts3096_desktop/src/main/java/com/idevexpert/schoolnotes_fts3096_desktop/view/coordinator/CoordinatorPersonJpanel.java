@@ -9,6 +9,7 @@ import com.idevexpert.schoolnotes_fts3096_desktop.utlis.ColorUtil;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.ButtonStateAccountPerson;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.TableActionCellEditor;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.TableActionEvent;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -66,6 +67,7 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
                 return labelComponent;
             }
         };
+       
     }
 
     private void configureColumn(int index, int minWidth, int positionText, JTable table) {

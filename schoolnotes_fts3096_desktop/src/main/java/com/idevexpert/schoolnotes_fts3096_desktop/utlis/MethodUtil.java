@@ -4,6 +4,7 @@
  */
 package com.idevexpert.schoolnotes_fts3096_desktop.utlis;
 
+import com.idevexpert.schoolnotes_fts3096_desktop.controller.ControllerCoordinator;
 import com.idevexpert.schoolnotes_fts3096_desktop.data.dto.AccountByPersonListDto;
 import com.idevexpert.schoolnotes_fts3096_desktop.data.dto.PersonDto;
 import com.idevexpert.schoolnotes_fts3096_desktop.data.rest.response.CoordinatorAccountsByPersonListResponse;
@@ -12,6 +13,7 @@ import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalCom
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -23,12 +25,23 @@ import raven.popup.component.SimplePopupBorder;
 
 //import raven.glasspanepopup.DefaultOption;
 //import raven.glasspanepopup.GlassPanePopup;
-
 /**
  *
  * @author Jesus Gutierrez
  */
 public abstract class MethodUtil {
+
+    private static ControllerCoordinator controllerCoordinator; // Referencia al controlador
+
+    public static void setControllerCoordinator(ControllerCoordinator controller) {
+        controllerCoordinator = controller; // Asignar la referencia
+    }
+
+    public static void onMouseClick(JComponent component) {
+        if (controllerCoordinator != null) {
+            controllerCoordinator.handleMouseClick(component); // Llamar al método en ControllerCoordinator
+        }
+    }
 
     public static void clearRowTable(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -77,7 +90,7 @@ public abstract class MethodUtil {
 
     // To use this method you first have to initialize the jframe with "GlassPanePopup.install(jframeMain)"
     public static void centerComponent(JComponent component, Integer[] locationComponent, int blockBackground) {
-         GlassPanePopup.showPopup(new GlassPaneLogin(component ));
+        GlassPanePopup.showPopup(new GlassPaneLogin(component));
 //        if (locationComponent == null) {
 //            if (blockBackground == 1) {
 //                GlassPanePopup.showPopup(component);

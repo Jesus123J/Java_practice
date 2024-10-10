@@ -40,9 +40,18 @@ public class MyDraweCoordinatorComponent extends SimpleDrawerBuilder{
 
     @Override
     public SimpleMenuOption getSimpleMenuOption() {
-        MenuItem dashboardPerson = new Item("Persona" ).subMenu("cuenta");
+             MenuItem educationalRole = 
+                new Item("Roles Educativo")
+                        .subMenu("Alumno")
+                        .subMenu("Profesor")
+                        .subMenu("Tutor")
+                        .subMenu("Apoderado");
+                                 
+        MenuItem dashboardPerson = 
+                new Item("Persona" );
         MenuItem[] menus = {
-            dashboardPerson
+            dashboardPerson,
+            educationalRole
         };
         return new SimpleMenuOption().setMenus(menus).addMenuEvent(new MenuEvent() {
             @Override

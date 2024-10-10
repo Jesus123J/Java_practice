@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.idevexpert</groupId>
     <artifactId>schoolnotes_fts3096_desktop</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
+    </properties>
+
     <dependencies>
-     
-        <!-- https://mvnrepository.com/artifact/com.kitfox.svg/svg-salamander -->
+        <!-- Dependencies here -->
         <dependency>
             <groupId>com.kitfox.svg</groupId>
             <artifactId>svg-salamander</artifactId>
             <version>1.0</version>
         </dependency>
-
-
 
         <dependency>
             <groupId>io.github.dj-raven</groupId>
@@ -22,72 +29,107 @@
             <version>1.4.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/net.java.dev.timingframework/timingframework -->
         <dependency>
             <groupId>net.java.dev.timingframework</groupId>
             <artifactId>timingframework</artifactId>
             <version>1.0</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.miglayout/miglayout -->
+
         <dependency>
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout</artifactId>
             <version>3.7.4</version>
         </dependency>
 
-        
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf-fonts-roboto</artifactId>
             <version>2.137</version>
-            <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.5.1</version>
-            <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>retrofit</artifactId>
             <version>2.11.0</version>
-            <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>logging-interceptor</artifactId>
             <version>5.0.0-alpha.14</version>
-            <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>converter-gson</artifactId>
             <version>2.11.0</version>
-            <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.34</version>
-            <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE210</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.13.0</version>
         </dependency>
-
     </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
-    </properties>
+
+    <build>
+        <plugins>
+            <!-- Plugin to specify the Main-Class in MANIFEST.MF -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- Replace this with your main class -->
+                            <mainClass>com.idevexpert.schoolnotes_fts3096_desktop.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin to create a Fat JAR with all dependencies included -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <!-- Replace this with your main class -->
+                                    <mainClass>com.idevexpert.schoolnotes_fts3096_desktop.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

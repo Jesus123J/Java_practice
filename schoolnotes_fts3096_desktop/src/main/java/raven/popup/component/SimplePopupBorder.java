@@ -7,6 +7,8 @@ import raven.popup.GlassPanePopup;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SimplePopupBorder extends GlassPaneChild {
 
@@ -45,8 +47,9 @@ public class SimplePopupBorder extends GlassPaneChild {
         panelTitle = new JPanel(new MigLayout("insets 2 25 2 25,fill"));
         if (title != null) {
             panelTitle.add(createTitle(title), "push");
+            panelTitle.add(createCloseButton(), "trailing");
         }
-        panelTitle.add(createCloseButton(), "trailing");
+      
         add(panelTitle);
         if (option.useScroll) {
             JScrollPane scrollPane = new JScrollPane(component);
@@ -55,11 +58,18 @@ public class SimplePopupBorder extends GlassPaneChild {
             applyScrollStyle(scrollPane.getHorizontalScrollBar());
             add(scrollPane);
         } else {
-            add(component);
+             add(component);
         }
         if (action != null) {
             add(createActionButton(action, callbackAction));
         }
+        
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                System.out.println("Se preciona");
+            }
+        });
     }
 
     private void applyScrollStyle(JScrollBar scrollBar) {

@@ -20,6 +20,7 @@ import com.idevexpert.schoolnotes_fts3096_desktop.exceptions.ErrorService;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import raven.popup.GlassPanePopup;
 import retrofit2.Response;
 
 /**
@@ -106,6 +107,7 @@ public class CoordinatorDao {
 
     protected CoordinatorPeopleListResponse personList(String token) {
         try {
+     
             return api.getService(CoordinatorPersonService.class).personList(token).execute().body();
         } catch (Exception e) {
             return null;

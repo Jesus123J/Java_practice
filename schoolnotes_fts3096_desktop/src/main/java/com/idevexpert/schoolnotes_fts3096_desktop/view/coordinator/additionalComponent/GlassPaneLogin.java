@@ -6,6 +6,8 @@ package com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalCo
 
 import com.idevexpert.schoolnotes_fts3096_desktop.utlis.ColorUtil;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.login.LoginJPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -28,8 +30,15 @@ public class GlassPaneLogin extends GlassPaneChild {
     }
 
     private void init() {
-        setBackground(ColorUtil.kPrimaryTransparent);
+      //  setBackground(ColorUtil.kPrimaryTransparent);
         setLayout(new MigLayout("wrap,fillx,insets 15 0 15 0", "[fill, ]"));
         add(component);
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("CLick glass login");
+            }
+            
+        });
     }
 }

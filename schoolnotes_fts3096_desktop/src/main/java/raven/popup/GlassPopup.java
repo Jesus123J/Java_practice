@@ -2,6 +2,7 @@ package raven.popup;
 
 import com.formdev.flatlaf.util.Animator;
 import com.formdev.flatlaf.util.CubicBezierEasing;
+import com.idevexpert.schoolnotes_fts3096_desktop.utlis.MethodUtil;
 import net.miginfocom.swing.MigLayout;
 import raven.popup.component.ComponentLayer;
 import raven.popup.component.GlassPaneChild;
@@ -12,8 +13,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.lang.reflect.Method;
 
 public class GlassPopup extends JComponent {
+
     private final GlassPanePopup parent;
     private final ComponentLayer componentLayer;
     private final Option option;
@@ -36,14 +39,23 @@ public class GlassPopup extends JComponent {
         initOption();
         setLayout(layout);
         add(componentLayer, option.getLayout(parent.layerPane, 0));
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Se hace click");
+                MethodUtil.onMouseClick(componentLayer.getComponent());
+            }
+        });
     }
 
     private void initOption() {
         if (option.closeWhenClickOutside()) {
             addMouseListener(new MouseAdapter() {
+
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     mouseHover = true;
+
                 }
 
                 @Override
@@ -68,48 +80,53 @@ public class GlassPopup extends JComponent {
     }
 
     private void initAnimator() {
-        animator = new Animator(option.duration(), new Animator.TimingTarget() {
+        new Thread() {
             @Override
-            public void timingEvent(float fraction) {
-                if (show) {
-                    animate = fraction;
-                } else {
-                    animate = 1f - fraction;
-                }
-                float f = format(animate);
-                option.setAnimate(f);
-                String lc = option.getLayout(parent.layerPane, f);
-                if (lc != null) {
-                    layout.setComponentConstraints(componentLayer, lc);
-                }
-                repaint();
-                revalidate();
-            }
+            public void run() {
+                animator = new Animator(option.duration(), new Animator.TimingTarget() {
+                    @Override
+                    public void timingEvent(float fraction) {
+                        if (show) {
+                            animate = fraction;
+                        } else {
+                            animate = 1f - fraction;
+                        }
+                        float f = format(animate);
+                        option.setAnimate(f);
+                        String lc = option.getLayout(parent.layerPane, f);
+                        if (lc != null) {
+                            layout.setComponentConstraints(componentLayer, lc);
+                        }
+                        repaint();
+                        revalidate();
+                    }
 
-            @Override
-            public void begin() {
-                componentLayer.showSnapshot();
-                if (option.useSnapshot()) {
-                    parent.windowSnapshots.createSnapshot();
-                    parent.contentPane.setVisible(false);
-                }
-            }
+                    @Override
+                    public void begin() {
+                        componentLayer.showSnapshot();
+                        if (option.useSnapshot()) {
+                            parent.windowSnapshots.createSnapshot();
+                            parent.contentPane.setVisible(false);
+                        }
+                    }
 
-            @Override
-            public void end() {
-                componentLayer.hideSnapshot();
-                if (show) {
-                    componentLayer.getComponent().popupShow();
-                } else {
-                    parent.removePopup(GlassPopup.this);
-                }
-                if (option.useSnapshot()) {
-                    parent.contentPane.setVisible(true);
-                    parent.windowSnapshots.removeSnapshot();
-                }
+                    @Override
+                    public void end() {
+                        componentLayer.hideSnapshot();
+                        if (show) {
+                            componentLayer.getComponent().popupShow();
+                        } else {
+                            parent.removePopup(GlassPopup.this);
+                        }
+                        if (option.useSnapshot()) {
+                            parent.contentPane.setVisible(true);
+                            parent.windowSnapshots.removeSnapshot();
+                        }
+                    }
+                });
+                animator.setInterpolator(CubicBezierEasing.EASE);
             }
-        });
-        animator.setInterpolator(CubicBezierEasing.EASE);
+        }.start();
     }
 
     public void setShowPopup(boolean show) {
