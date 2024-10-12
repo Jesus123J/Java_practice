@@ -20,7 +20,8 @@ import java.util.List;
  */
 public class UserDaoImpl implements ConnectionDataBase, UserDao {
     
-    Connection connection  = connectionSqlServer;
+    
+    Connection connection  = connectionMysql;
     
     @Override
     public void insert(UserDto user) {

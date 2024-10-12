@@ -9,6 +9,7 @@ import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalCom
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import net.miginfocom.swing.MigLayout;
 import raven.drawer.Drawer;
 import raven.popup.GlassPanePopup;
 import raven.toast.Notifications;
@@ -39,6 +40,8 @@ public class JframeMain extends javax.swing.JFrame {
         Image image = icon.getImage();
         setIconImage(image);
         setTitle("FRANZ TAMAYO SOLARES");
+        MigLayout layout = new MigLayout("fill, insets 0");
+        jPanel4.setLayout(layout);
     }
     
     @SuppressWarnings("unchecked")
@@ -53,7 +56,7 @@ public class JframeMain extends javax.swing.JFrame {
         badgeButton1 = new com.idevexpert.schoolnotes_fts3096_desktop.view.BadgeButton();
         actionButton2 = new com.idevexpert.schoolnotes_fts3096_desktop.utlis.ActionButton();
         toggleButton1 = new toggle.ToggleButton(this);
-        jPanel4 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,7 +92,7 @@ public class JframeMain extends javax.swing.JFrame {
         badgeButton1.setText("5");
         badgeButton1.setHideActionText(true);
 
-        actionButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/header/menuHome.png"))); // NOI18N
+        actionButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconUpdate.png"))); // NOI18N
 
         toggleButton1.setForeground(new java.awt.Color(0, 0, 0));
         toggleButton1.setSelected(true);
@@ -101,7 +104,7 @@ public class JframeMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(actionButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 434, Short.MAX_VALUE)
                 .addComponent(badgeButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(actionButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,21 +130,30 @@ public class JframeMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel4.setLayout(new java.awt.BorderLayout());
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 355, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -156,7 +168,7 @@ public class JframeMain extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel1;
     public javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    public javax.swing.JPanel jPanel4;
+    public javax.swing.JLayeredPane jPanel4;
     private com.idevexpert.schoolnotes_fts3096_desktop.utlis.PanelRound panelRound1;
     private toggle.ToggleButton toggleButton1;
     // End of variables declaration//GEN-END:variables

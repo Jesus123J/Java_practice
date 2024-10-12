@@ -9,15 +9,20 @@ import com.idevexpert.schoolnotes_fts3096_desktop.utlis.ColorUtil;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.ButtonStateAccountPerson;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.TableActionCellEditor;
 import com.idevexpert.schoolnotes_fts3096_desktop.view.coordinator.additionalComponent.TableActionEvent;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
@@ -33,7 +38,9 @@ import raven.datetime.component.date.DatePicker;
  * @author Jesus Gutierrez
  */
 public class CoordinatorPersonJpanel extends javax.swing.JPanel {
+
     private DatePicker datePicker = new DatePicker();
+
     private TableCellRenderer createCustomRenderer(int positionText) {
         return new TableCellRenderer() {
             @Override
@@ -67,7 +74,7 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
                 return labelComponent;
             }
         };
-       
+
     }
 
     private void configureColumn(int index, int minWidth, int positionText, JTable table) {
@@ -141,15 +148,15 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
         }
         );
         //
-        jTableDataAccount.getTableHeader().getColumnModel().getColumn(4).setCellRenderer(new DefaultTableCellRenderer(){
+        jTableDataAccount.getTableHeader().getColumnModel().getColumn(4).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-              ButtonStateAccountPerson buttonStateAccountPerson = new ButtonStateAccountPerson();
+                ButtonStateAccountPerson buttonStateAccountPerson = new ButtonStateAccountPerson();
                 if (isSelected) {
                     if (FlatMacDarkLaf.isLafDark()) {
                         buttonStateAccountPerson.setBorder(BorderFactory.createLineBorder(ColorUtil.kPrimaryWhite, 1));
                         buttonStateAccountPerson.setBackground(ColorUtil.kPrimaryWhite);
-                        
+
                     } else {
                         buttonStateAccountPerson.setBorder(BorderFactory.createLineBorder(ColorUtil.kPrimaryBlack, 1));
                         buttonStateAccountPerson.setBackground(ColorUtil.kPrimaryGray);
@@ -270,6 +277,7 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
         jCheckBoxMen = new javax.swing.JCheckBox();
         jCheckBoxWomen = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
+        button2 = new com.idevexpert.schoolnotes_fts3096_desktop.utlis.Button();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDataAccount = new javax.swing.JTable();
@@ -329,6 +337,12 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
 
         jLabel1.setText("Ingrese fecha de cumpleaños");
 
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -339,15 +353,18 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(textFieldCellPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                                .addComponent(textFieldCellPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textFieldPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
-                            .addComponent(textFieldAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textFieldPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
                             .addComponent(textFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(textFieldDni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(textFieldMotherLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(textFieldLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(textFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(textFieldAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(10, 10, 10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -377,7 +394,9 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
                     .addComponent(textFieldCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textFieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textFieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(1, 1, 1)
@@ -399,7 +418,7 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonEditOrRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                         .addGap(10, 10, 10))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -442,7 +461,7 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                     .addComponent(buttonCreateAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -471,12 +490,12 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                     .addComponent(textFieldPersonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -500,9 +519,14 @@ public class CoordinatorPersonJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenMouseClicked
 
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+
+    }//GEN-LAST:event_button2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public com.idevexpert.schoolnotes_fts3096_desktop.utlis.Button button1;
+    public com.idevexpert.schoolnotes_fts3096_desktop.utlis.Button button2;
     public com.idevexpert.schoolnotes_fts3096_desktop.utlis.Button buttonCreateAccount;
     public com.idevexpert.schoolnotes_fts3096_desktop.utlis.Button buttonEditOrRegister;
     public javax.swing.JCheckBox jCheckBoxMen;

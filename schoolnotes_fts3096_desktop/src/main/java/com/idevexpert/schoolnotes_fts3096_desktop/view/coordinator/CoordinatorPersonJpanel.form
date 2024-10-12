@@ -19,13 +19,13 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="430" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="451" max="32767" attributes="0"/>
                   <Component id="textFieldPersonSearch" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="button1" max="32767" attributes="0"/>
-                  <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" pref="510" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -172,7 +172,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="buttonEditOrRegister" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jScrollPane3" pref="473" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" pref="494" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -218,16 +218,20 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="textFieldCellPhone" pref="216" max="32767" attributes="0"/>
+                                              <Component id="textFieldCellPhone" pref="227" max="32767" attributes="0"/>
                                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                                              <Component id="textFieldPhone" pref="217" max="32767" attributes="0"/>
+                                              <Component id="textFieldPhone" pref="227" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="textFieldAddress" alignment="0" max="32767" attributes="0"/>
                                           <Component id="textFieldEmail" alignment="0" max="32767" attributes="0"/>
                                           <Component id="textFieldDni" alignment="0" max="32767" attributes="0"/>
                                           <Component id="textFieldMotherLastName" alignment="0" max="32767" attributes="0"/>
                                           <Component id="textFieldLastName" alignment="0" max="32767" attributes="0"/>
                                           <Component id="textFieldName" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="textFieldAddress" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="button2" min="-2" pref="59" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   </Group>
@@ -265,7 +269,10 @@
                                   <Component id="textFieldPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="textFieldAddress" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="textFieldAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="button2" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
@@ -376,6 +383,14 @@
                         <Property name="text" type="java.lang.String" value="Ingrese fecha de cumplea&#xf1;os"/>
                       </Properties>
                     </Component>
+                    <Component class="com.idevexpert.schoolnotes_fts3096_desktop.utlis.Button" name="button2">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button2ActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
@@ -397,7 +412,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" pref="477" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="498" max="32767" attributes="0"/>
                           <Component id="buttonCreateAccount" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>

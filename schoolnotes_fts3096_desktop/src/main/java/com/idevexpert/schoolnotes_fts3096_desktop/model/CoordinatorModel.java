@@ -28,10 +28,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.JComponent;
+import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import org.apache.commons.lang3.StringUtils;
 import raven.alerts.MessageAlerts;
 import raven.drawer.Drawer;
@@ -49,6 +53,10 @@ import raven.popup.component.SimplePopupBorderOption;
  */
 public class CoordinatorModel extends CoordinatorDao {
 
+    // private String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+    private String emailPattern = "^[a-zA-Z0-9._%+-]+@(gmail\\.com|uni\\.edu\\.pe)$";
+
+    private Pattern pattern = Pattern.compile(emailPattern);
     public CoordinatorAnnouncementJpanel coordinatorAnnouncementJpanel;
     public CoordinatorAttendanceJpanel coordinatorAttendanceJpanel;
     public CoordinatorCasesJpanel coordinatorCasesJpanel;
@@ -129,96 +137,103 @@ public class CoordinatorModel extends CoordinatorDao {
     }
 
     public void insertDataTablePersonAccount(CoordinatorPeopleListResponse coordinatorPeopleListResponseTempChang) {
-        new Thread(new Runnable() {
+        new SwingWorker<CoordinatorAccountsByPersonListResponse, Void>() {
             @Override
-            public void run() {
-                System.out.println("Espera");
-                responseListAccountByPerson = listAccountByPerson(token, coordinatorPeopleListResponseTempChang.getListPerson().get(coordinatorPersonJpanel.jTableDataPerson.getSelectedRow()).getPersonId());
-                System.out.println("Imprime");
+            protected CoordinatorAccountsByPersonListResponse doInBackground() throws Exception {
+               // jframeMain.jPanel4.add(lodingJpanel);
+                jframeMain.jPanel4.setLayer(lodingJpanel, JLayeredPane.POPUP_LAYER);
+                jframeMain.jPanel4.add(lodingJpanel, "pos 0 0 100% 100%");
+    jframeMain.jPanel4.setComponentZOrder(lodingJpanel, 0);
+                jframeMain.jPanel4.revalidate();
+                jframeMain.jPanel4.repaint();
                 try {
+                    return listAccountByPerson(token, coordinatorPeopleListResponseTempChang.getListPerson().get(coordinatorPersonJpanel.jTableDataPerson.getSelectedRow()).getPersonId());
+                } catch (Exception e) {
+                    MessageAlerts.getInstance().showMessage("", "No tiene conexion vuelva a intentarlo otra ves", MessageAlerts.MessageType.WARNING);
+                    return null;
+                }
+            }
 
+            @Override
+            protected void done() {
+                try {
+                    responseListAccountByPerson = get();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CoordinatorModel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ExecutionException ex) {
+                    Logger.getLogger(CoordinatorModel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jframeMain.jPanel4.remove(lodingJpanel);
+                jframeMain.jPanel4.revalidate();
+                jframeMain.jPanel4.repaint();
+                if (responseListAccountByPerson != null) {
                     if (responseListAccountByPerson.getAccountsList() == null) {
                         coordinatorPersonJpanel.jTabbedPane1.setSelectedIndex(0);
                         coordinatorPersonJpanel.jTabbedPane1.setEnabledAt(1, false);
-                        MessageAlerts.getInstance().showMessage("", "No cuenta con cuenta esta persona");
+                        MessageAlerts.getInstance().showMessage("No hay Cuenta", "No cuenta con cuenta esta persona");
                     } else {
                         coordinatorPersonJpanel.jTabbedPane1.setEnabledAt(1, true);
                     }
                     MethodUtil.insertDataTable(responseListAccountByPerson, coordinatorPersonJpanel.jTableDataAccount);
-                } catch (Exception e) {
-                    MessageAlerts.getInstance().showMessage("", "No tiene conexion vuelva a intentarlo otra ves", MessageAlerts.MessageType.WARNING);
+                } else {
+                    coordinatorPersonJpanel.jTabbedPane1.setSelectedIndex(0);
+                    coordinatorPersonJpanel.jTabbedPane1.setEnabledAt(1, false);
+                    MessageAlerts.getInstance().showMessage("Conexion", "Error de conexion", MessageAlerts.MessageType.ERROR);
                 }
-                
-                GlassPanePopup.closePopupAll();
-
             }
-        }).start();
+
+        }.execute();
+
     }
 
     public void insertCopyDataTablePerson(CoordinatorPeopleListResponse coordinatorPeopleListResponseTempChang, int nothingOrsomething) {
+        SwingUtilities.invokeLater(() -> {
+            int indice = coordinatorPersonJpanel.jTableDataPerson.getSelectedRow();
+            coordinatorPersonJpanel.textFieldName.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getName()) : "");
+            coordinatorPersonJpanel.textFieldLastName.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getLastname()) : "");
+            coordinatorPersonJpanel.textFieldMotherLastName.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getMotherLastname()) : "");
+            coordinatorPersonJpanel.textFieldDni.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getDni()) : "");
+            coordinatorPersonJpanel.textFieldPhone.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getPhone()) : "");
+            coordinatorPersonJpanel.textFieldEmail.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getMail()) : "");
+            coordinatorPersonJpanel.textFieldAddress.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getAddress()) : "");
+            coordinatorPersonJpanel.textFieldCellPhone.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getCellphone()) : "");
 
-        int indice = coordinatorPersonJpanel.jTableDataPerson.getSelectedRow();
-        coordinatorPersonJpanel.textFieldName.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getName()) : "");
-        coordinatorPersonJpanel.textFieldLastName.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getLastname()) : "");
-        coordinatorPersonJpanel.textFieldMotherLastName.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getMotherLastname()) : "");
-        coordinatorPersonJpanel.textFieldDni.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getDni()) : "");
-        coordinatorPersonJpanel.textFieldPhone.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getPhone()) : "");
-        coordinatorPersonJpanel.textFieldEmail.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getMail()) : "");
-        coordinatorPersonJpanel.textFieldAddress.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getAddress()) : "");
-        coordinatorPersonJpanel.textFieldCellPhone.setText(nothingOrsomething == 1 ? StringUtils.trimToEmpty(coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getCellphone()) : "");
-
-        if (nothingOrsomething == 0 && coordinatorPeopleListResponseTempChang == null) {
-            coordinatorPersonJpanel.jFormattedTextFieldDate.setText("");
-            coordinatorPersonJpanel.jCheckBoxWomen.setSelected(false);
-            coordinatorPersonJpanel.jCheckBoxMen.setSelected(false);
-            coordinatorPersonJpanel.jTabbedPane1.setSelectedIndex(0);
-            coordinatorPersonJpanel.jTabbedPane1.setEnabledAt(1, false);
-            MethodUtil.clearRowTable(coordinatorPersonJpanel.jTableDataAccount);
-            return;
-        }
-        String sexPeson = coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getSex();
-        String dateEnter = coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getBirthdate();
-        try {
-            if (dateEnter != null) {
-                Date date = formatoEntrada.parse(dateEnter);
-                coordinatorPersonJpanel.jFormattedTextFieldDate.setText(formatoSalida.format(date));
-            } else {
+            if (nothingOrsomething == 0 && coordinatorPeopleListResponseTempChang == null) {
                 coordinatorPersonJpanel.jFormattedTextFieldDate.setText("");
+                coordinatorPersonJpanel.jCheckBoxWomen.setSelected(false);
+                coordinatorPersonJpanel.jCheckBoxMen.setSelected(false);
+                coordinatorPersonJpanel.jTabbedPane1.setSelectedIndex(0);
+                coordinatorPersonJpanel.jTabbedPane1.setEnabledAt(1, false);
+                MethodUtil.clearRowTable(coordinatorPersonJpanel.jTableDataAccount);
+                return;
             }
-        } catch (ParseException ex) {
-        }
+            String sexPeson = coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getSex();
+            String dateEnter = coordinatorPeopleListResponseTempChang.getListPerson().get(indice).getBirthdate();
+            try {
+                if (dateEnter != null) {
+                    Date date = formatoEntrada.parse(dateEnter);
+                    coordinatorPersonJpanel.jFormattedTextFieldDate.setText(formatoSalida.format(date));
+                } else {
+                    coordinatorPersonJpanel.jFormattedTextFieldDate.setText("");
+                }
+            } catch (ParseException ex) {
+            }
 
-        if (StringUtils.trimToEmpty(sexPeson).equalsIgnoreCase("M")) {
-            coordinatorPersonJpanel.jCheckBoxWomen.setSelected(false);
-            coordinatorPersonJpanel.jCheckBoxMen.setSelected(true);
-        } else if (StringUtils.trimToEmpty(sexPeson).equalsIgnoreCase("F")) {
-            coordinatorPersonJpanel.jCheckBoxWomen.setSelected(true);
-            coordinatorPersonJpanel.jCheckBoxMen.setSelected(false);
-        } else {
-            coordinatorPersonJpanel.jCheckBoxWomen.setSelected(false);
-            coordinatorPersonJpanel.jCheckBoxMen.setSelected(false);
-        }
+            if (StringUtils.trimToEmpty(sexPeson).equalsIgnoreCase("M")) {
+                coordinatorPersonJpanel.jCheckBoxWomen.setSelected(false);
+                coordinatorPersonJpanel.jCheckBoxMen.setSelected(true);
+            } else if (StringUtils.trimToEmpty(sexPeson).equalsIgnoreCase("F")) {
+                coordinatorPersonJpanel.jCheckBoxWomen.setSelected(true);
+                coordinatorPersonJpanel.jCheckBoxMen.setSelected(false);
+            } else {
+                coordinatorPersonJpanel.jCheckBoxWomen.setSelected(false);
+                coordinatorPersonJpanel.jCheckBoxMen.setSelected(false);
+            }
+        });
+
     }
 
     public void listTypeTempOrLinearForTablePerson() {
-      
-        GlassPanePopup.showPopup(new SimplePopupBorder(lodingJpanel, null, new SimplePopupBorderOption()
-                .setRoundBorder(30)
-                .setWidth(300).setOpaque(true)), new DefaultOption() {
-            @Override
-            public int duration() {
-                return 1;
-            }
-
-            @Override
-            public float getAnimate() {
-                setAnimate(1);
-                return 1;
-            }    
-            
-            
-
-        }, "loading");
 
         if (coordinatorPersonJpanel.jTableDataPerson.getRowCount() != personListTable.getListPerson().size()) {
             insertCopyDataTablePerson(personListTableTem, 1);
@@ -227,15 +242,28 @@ public class CoordinatorModel extends CoordinatorDao {
             insertCopyDataTablePerson(personListTable, 1);
             insertDataTablePersonAccount(personListTable);
         }
+
     }
 
     public void accountGlassPaneCreate() {
         //  GlassPanePopup.showPopup(new CreateAccountPerson());
     }
 
+    protected void validateEmail() {
+        String email = coordinatorPersonJpanel.textFieldEmail.getText();
+        if (pattern.matcher(email).matches()) {
+            coordinatorPersonJpanel.textFieldEmail.setForeground(Color.GREEN);
+        } else {
+            coordinatorPersonJpanel.textFieldEmail.setForeground(Color.RED);
+        }
+    }
+
     public void insertComponentCenter(JComponent component) {
         jframeMain.jPanel4.removeAll();
-        jframeMain.jPanel4.add(component);
+        jframeMain.jPanel4.setLayer(component, JLayeredPane.POPUP_LAYER);
+        jframeMain.jPanel4.add(component, "pos 0 0 100% 100%");
+//        jframeMain.jPanel4.removeAll();
+//        jframeMain.jPanel4.add(component);
         jframeMain.jPanel4.revalidate();
         jframeMain.jPanel4.repaint();
 

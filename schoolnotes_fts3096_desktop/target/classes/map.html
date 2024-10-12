@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        #search-container {
+            position: absolute;
+            top: 10px;
+            left: 70px;
+            z-index: 1000; /* Asegúrate de que esté por encima del mapa */
+            background-color: white; /* Fondo blanco para el campo de búsqueda */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div id="search-container">
+        <input type="text" id="search" placeholder="Buscar dirección..." oninput="searchAddress(this.value)">
+    </div>
+    <div id="map"></div>
+    
+    <script>
+        // Coordenadas de Lima, Perú
+        var limaLat = -12.0464; // Latitud de Lima
+        var limaLon = -77.0428; // Longitud de Lima
+
+        // Inicializar el mapa centrado en Lima
+        var map = L.map('map').setView([limaLat, limaLon], 13);
+
+        // Capa del mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Marcador de la ubicación de Lima
+        var marker = L.marker([limaLat, limaLon]).addTo(map)
+            .bindPopup('Estás en Lima, Perú.')
+            .openPopup();
+
+        // Función para buscar la dirección y actualizar el marcador
+        function searchAddress(query) {
+            if (query.length < 3) return; // Evitar buscar si hay menos de 3 caracteres
+
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        // Obtener las coordenadas de la primera coincidencia
+                        var lat = data[0].lat;
+                        var lon = data[0].lon;
+
+                        // Actualizar el mapa y el marcador
+                        map.setView([lat, lon], 13); // Centrar el mapa en la nueva ubicación
+                        marker.setLatLng([lat, lon])
+                            .bindPopup('Dirección: ' + data[0].display_name)
+                            .openPopup();
+
+                        // Llama a la función Java para actualizar el JTextField con la dirección
+                        window.java.javaAddressHandler(data[0].display_name);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error obteniendo la dirección:', error);
+                });
+        }
+    </script>
+</body>
+</html>

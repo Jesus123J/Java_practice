@@ -128,6 +128,7 @@ C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_d
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorTeacherCoursesListResponse.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\TeacherListNoteTypesByCourseRequest.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\EditAccountPerson.java
+C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\utlis\NumericFilter.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\CoordinatorSendAnnouncementRequest.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TutorListAssignedStudentsResponse.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TeacherNoteStudentRegisterResponse.java
@@ -215,6 +216,7 @@ C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_d
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorStudentsAvailableTutorResponse.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\CoordinatorDesAssingStudentByProxyRequest.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorStudentsAssignedByProxyResponse.java
+C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\view\coordinator\additionalComponent\MapaJpanel.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\view\login\LoginJPanel.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\service\CoodinatorSummaryService.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\request\CoordinatorEditPersonDataRequest.java
@@ -224,6 +226,7 @@ C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_d
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\dto\PersonProxyAssignedDto.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\TutorCloseCaseResponse.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\service\CoordinatorCasesService.java
+C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\MainApp.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\rest\response\CoordinatorAccountsByPersonListResponse.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\raven\drawer\component\menu\MenuLayout.java
 C:\Users\Jesus Gutierrez\Documents\WorkSpace\Java_practice\schoolnotes_fts3096_desktop\src\main\java\com\idevexpert\schoolnotes_fts3096_desktop\data\dto\AlertsForCoordinatorDto.java
